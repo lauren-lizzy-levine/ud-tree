@@ -111,12 +111,15 @@ class Sentence extends React.Component {
     this.handleOutsideMouseUp = this.handleOutsideMouseUp.bind(this);
     this.handleLemmaChange = this.handleLemmaChange.bind(this);
     this.handleXposChange = this.handleXposChange.bind(this);
+    this.setXposEditTokenId = this.setXposEditTokenId.bind(this);
     this.state = {
       sentence: props.sentence,
       mounted: false,
       cursorOrigin: null,
       cursorCoords: null,
       cursorOriginId: null,
+      deprelEditTokenId: null,
+      xposEditTokenId: null
     };
   }
 
@@ -156,8 +159,12 @@ class Sentence extends React.Component {
     token.lemma.value = lemma;
     return sentence;
   }
-
   // End methods that need to talk to API
+
+  setXposEditTokenId(id) {
+    this.setState({xposEditTokenId: id});
+  }
+
   handleXposChange(tokenId, newVal) {
     this.setXpos(this.state.sentence, tokenId, newVal)
   }
@@ -339,7 +346,9 @@ class Sentence extends React.Component {
                                          handleMouseDown={this.handleMouseDown}
                                          handleMouseUp={this.handleMouseUp}
                                          handleXposChange={this.handleXposChange}
-                                         handleLemmaChange={this.handleLemmaChange} />)}
+                                         handleLemmaChange={this.handleLemmaChange}
+                                         xposEditTokenId={this.state.xposEditTokenId} 
+                                         setXposEditTokenId={this.setXposEditTokenId} />)}
         </Row>
       </div>
     )
@@ -353,7 +362,7 @@ class Token extends React.Component {
   }
 
   render() {
-    const {handleMouseDown, handleMouseUp, handleLemmaChange, handleXposChange, token} = this.props;
+    const {handleMouseDown, handleMouseUp, handleLemmaChange, handleXposChange, setXposEditTokenId, xposEditTokenId, token} = this.props;
     const { id, tokenType, form, lemma, upos, xpos, feats, head, deprel, deps, misc} = token;
     return (
       <div ref={this.props.innerRef}>
@@ -362,13 +371,15 @@ class Token extends React.Component {
             {form.value}
           </div>
           <ContentEditable className="lemma" html={lemma.value} onChange={(e) => handleLemmaChange(id, e.target.value)} />
-          {this.state.editXpos 
-          ? <select className="xpos xpos-select" value={xpos.value} 
-                    onMouseOut ={() => this.setState({editXpos: false})}
+          {xposEditTokenId === id
+          ? <div style={{position: "relative"}}>
+              <select className="xpos xpos-select" value={xpos.value}
+                    onMouseLeave={() => setXposEditTokenId(null)} 
                     onChange={(e) => {handleXposChange(id, e.target.value);}}>
-             {getXpos("en").map(l => <option key={l} value={l}>{l}</option>)}
-            </select>
-          : <div className="xpos" onMouseOver={() => this.setState({editXpos: true})}>{xpos.value}</div>}
+                {getXpos("en").map(l => <option key={l} value={l}>{l}</option>)}
+              </select>
+            </div>
+          : <div className="xpos" onMouseOver={() => setXposEditTokenId(id)}>{xpos.value}</div>}
         </Col>
       </div>
     )
