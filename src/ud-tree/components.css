@@ -1,0 +1,58 @@
+.form {
+    display: flex;
+    cursor: pointer;
+    user-select: none;
+}
+.lemma {
+    display: flex;
+    font-size: 10px;
+}
+.xpos {
+    display: flex;
+    font-size: 10px;
+    color: gray;
+    cursor: pointer;
+}
+.xpos-select {
+    width: 40px;
+}
+.deprel {
+    font-size: 9px;
+    cursor: pointer;
+}
+.deprel-select {
+    width: 50px;
+    margin: 20px;
+}
+
+.row {
+    display: flex;
+    gap: 6px;
+}
+.col {
+    display: flex;
+    gap: 6px;
+    flex-direction: column;
+}
+
+.sentence {
+    width: max-content;
+}
+
+.tree-svg {
+    width: 100%;
+    height: 200px;
+    margin-bottom: -20px;
+}
+
+.root-bar {
+    cursor: pointer;
+    fill: transparent;
+}
+.root-bar:hover {
+    fill: #eeeeee;
+}
+
+.hidden {
+    display: none;
+}
