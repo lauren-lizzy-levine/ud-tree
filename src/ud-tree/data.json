@@ -34,7 +34,10 @@
                     },
                     "head": {
                         "id": "35c74315-5e69-4ca3-8a71-e325d6869a68",
-                        "value": "root"
+                        "value": "root",
+                        "probas": {
+                            "root": 0.05
+                        }
                     },
                     "upos": {
                         "id": "558c6b8b-b285-4366-bbdc-043d90131f44",
@@ -93,7 +96,10 @@
                     },
                     "head": {
                         "id": "d56001bc-e463-4e40-9292-203c34ff7cf2",
-                        "value": "ad4b2b59-16e0-4290-9cdb-1a69851f72c3"
+                        "value": "ad4b2b59-16e0-4290-9cdb-1a69851f72c3",
+                        "probas": {
+                            "ad4b2b59-16e0-4290-9cdb-1a69851f72c3": 0.05
+                        }
                     },
                     "upos": {
                         "id": "8e5e1e57-b896-4f1d-8ded-e0198c76da53",

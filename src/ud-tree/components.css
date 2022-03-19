@@ -18,6 +18,13 @@
     position: absolute;
     left: -20px;
 }
+.highlighted-xpos {
+    display: flex;
+    font-size: 10px;
+    color: red;
+    cursor: pointer;
+    font-weight: bold;
+}
 .deprel {
     font-size: 9px;
     cursor: pointer;
@@ -26,7 +33,11 @@
     width: 50px;
     margin: 20px;
 }
-
+.highlighted-deprel {
+    font-size: 9px;
+    cursor: pointer;
+    font-weight: bold;
+}
 .row {
     display: flex;
     gap: 6px;
